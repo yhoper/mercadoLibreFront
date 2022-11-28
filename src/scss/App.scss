@@ -1,4 +1,156 @@
-body {
-    background-color: silver;
-    text-align: center;
+$wh-10: 10%;
+$wh-20: 20%;
+$wh-30: 30%;
+$wh-33: 33%;
+$wh-40: 40%;
+$wh-50: 50%;
+$wh-60: 60%;
+$wh-70: 70%;
+$wh-80: 80%;
+$wh-90: 90%;
+$wh-100: 100%;
+$bg-fondo: #eeeeee;
+$company-color: #fff159;
+$margin-0: 0;
+
+body,
+html {
+  font-size: 22px;
+  background-color: $bg-fondo;
+  margin: $margin-0;
+}
+
+header {
+  background-color: $company-color;
+}
+.card {
+  color: white;
+  padding: 1rem;
+}
+
+.wh-10 {
+  width: $wh-10;
+}
+.wh-20 {
+  width: $wh-20;
+}
+.wh-30 {
+  width: $wh-30;
+}
+.wh-33 {
+  width: $wh-33;
+}
+.wh-40 {
+  width: $wh-40;
+}
+.wh-50 {
+  width: $wh-50;
+}
+.wh-60 {
+  width: $wh-60;
+}
+.wh-70 {
+  width: $wh-70;
+}
+.wh-80 {
+  width: $wh-80;
+}
+.wh-90 {
+  width: $wh-90;
+}
+.wh-100 {
+  width: $wh-100;
+}
+
+.container {
+  max-width: 1200px;
+  //background-color: red;
+  margin: 0 auto;
+  display: flex;
+  grid-gap: 1rem;
+}
+
+.logo {
+  height: 34px;
+  top: 11px;
+  width: 134px;
+}
+
+/* Screen larger than 600px? 2 column */
+@media (min-width: 600px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Screen larger than 900px? 3 columns */
+@media (min-width: 900px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+//changed direction and background color in magnifying glass
+.sc-hLBbgP.krXLSU {
+  flex-direction: row-reverse;
+}
+
+svg.sc-bcXHqe.eWFcRu.search-icon {
+  margin: 0;
+  padding: 10px;
+  background-color: #eeeeee;
+}
+
+// delete backgorund on searching list
+li > svg.sc-bcXHqe.eWFcRu.search-icon {
+  background: #fff0;
+}
+.hCpHso .selected,
+li > svg.sc-bcXHqe.eWFcRu.search-icon:hover {
+  background-color: #3483fa !important;
+  color: #fff;
+}
+li .selected .eWFcRu,
+li:hover .eWFcRu {
+  fill: white !important;
+}
+
+.clear-icon {
+  display: none;
+}
+
+nav {
+  display: block;
+}
+
+ol {
+  display: block;
+  list-style-type: decimal;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+.andes-breadcrumb .andes-breadcrumb__link {
+  color: #3483fa;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#container {
+  position: absolute;
+  top: 50%;
+  margin-top: -200px;
+  /* Half of #content height */
+  left: 0;
+  width: 100%;
+}
+
+#content {
+  width: 624px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 395px;
+  border: 1px solid #000000;
 }
