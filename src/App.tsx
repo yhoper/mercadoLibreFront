@@ -19,7 +19,7 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/items/search=algo" element={<Plp />} />
+          <Route path="/items" element={<Plp />} />
           <Route path="/items/:id" element={<Pdp />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
