@@ -1,43 +1,24 @@
 import React, { useState } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-
-const items = [
-  {
-    id: 0,
-    title: "Cobol",
-  },
-  {
-    id: 1,
-    title: "JavaScript",
-  },
-  {
-    id: 2,
-    title: "Basic",
-  },
-  {
-    id: 3,
-    title: "PHP",
-  },
-  {
-    id: 4,
-    title: "Java",
-  },
-];
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const SearchBox = () => {
-  const [itemsMl, setItemsMl] = useState([]);
+  const location = useLocation();
+  const history = useNavigate();
+  const [items, setItems] = useState([]);
   const onChange = () => {
     console.log("Prueba");
   };
 
   const handleOnSearch = async (string, results) => {
+    console.log("2");
     console.log(string, results);
     let resApi = await fetch(
-      `https://api.mercadolibre.com/sites/MLC/search?q=${string}&limit=4`
+      `https://api.mercadolibre.com/sites/MLA/search?q=${string}&limit=4`
     );
+    console.log("pppppp", string, results);
     let products = await resApi.json();
-    console.log(products?.results);
-    setItemsMl(products?.results);
+    await setItems(products?.results);
   };
 
   const handleOnHover = (result) => {
@@ -45,7 +26,9 @@ export const SearchBox = () => {
   };
 
   const handleOnSelect = (item) => {
-    console.log(item);
+    let text = item.title;
+    let formated = text.replace(/\s/g, "-");
+    document.location.href = `/items?search=${formated}`;
   };
 
   const handleOnFocus = () => {
@@ -53,31 +36,24 @@ export const SearchBox = () => {
   };
 
   const formatResult = (item) => {
-    console.log(item, "formatResult");
     return (
-      <>
-        <span style={{ display: "block", textAlign: "left" }}>
-          id: {item.id}
-        </span>
-        <span style={{ display: "block", textAlign: "left" }}>
-          title: {item.title}
-        </span>
-      </>
+      <span style={{ display: "block", textAlign: "left" }}>{item.title}</span>
     );
   };
   return (
     <div className="card wh-90">
       <div>
         <ReactSearchAutocomplete
-          items={itemsMl}
+          items={items}
           onSearch={handleOnSearch}
           onHover={handleOnHover}
           onSelect={handleOnSelect}
           autoFocus
           placeholder="Nunca dejes de buscar"
-          styling={{ borderRadius: "4px", height: "40px" }}
-          fuseOptions={{ keys: ["title", "description"] }}
+          styling={{ borderRadius: "6px", height: "40px" }}
+          fuseOptions={{ keys: ["title"] }}
           resultStringKeyName="title"
+          formatResult={formatResult}
         />
       </div>
     </div>
