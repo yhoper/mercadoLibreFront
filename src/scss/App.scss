@@ -14,6 +14,7 @@ $color-silver: #eeeeee;
 $color-white: #fff;
 $color-yellow: #fff159;
 $color-blue: #3483fa;
+$color-blue-dark: #2077fa;
 $color-black: #000000;
 $color-green: #00a650;
 $margin-0: 0;
@@ -138,20 +139,25 @@ nav {
   display: block;
 }
 
-.amount,
-ol {
+.amount {
   display: block;
   list-style-type: decimal;
   margin-block-start: $separated-1em;
   margin-block-end: $separated-1em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.25;
   // padding-inline-start: 40px;
 }
 .andes-breadcrumb .andes-breadcrumb__link {
   color: $color-blue;
   cursor: pointer;
   text-decoration: none;
+}
+.txt-20 {
+  font-size: 20px;
 }
 
 #container {
@@ -221,6 +227,9 @@ ol {
 .mt-0 {
   margin-top: 0px;
 }
+.pd-l-r-1rem {
+  padding: 0px $separated-1em !important;
+}
 
 .card-plp-discount {
   display: inline-flex;
@@ -247,10 +256,14 @@ img.plp-height {
   width: 100%;
   margin: 0 $separated-1em 0 $separated-1em;
   padding: $separated-1em 0 $separated-1em 0;
+  
+}
+
+.border-botton{
   border-bottom: 1px solid $color-silver;
 }
 
-.col-plp-bg:hover {
+.card-plp:hover {
   box-shadow: 0px 1px 10px 2px $color-silver inset;
   -webkit-box-shadow: 0px 1px 10px 2px $color-silver inset;
   -moz-box-shadow: 0px 1px 10px 2px $color-silver inset;
@@ -265,9 +278,24 @@ p a {
   text-align: $align-c;
 }
 
-.plp-img{
- padding-left: $separated-1em; 
- width: 80%;
- height: 80%;
- object-fit: contain;
+.plp-img {
+  padding-left: $separated-1em;
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
 }
+
+.btn-buy {
+  background-color: #3483fa;
+  border: 0;
+  padding: 14px;
+  border-radius: 6px;
+  width: 275px;
+  height: 48px;
+  color: #fff;
+}
+
+.btn-buy:hover {
+  background-color: $color-blue;
+}
+

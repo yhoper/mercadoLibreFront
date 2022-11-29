@@ -6,11 +6,11 @@ const Plp = () => {
   let txtToSearch = txtUrl.split("?search=")[1].replace(/-/g, " ");
   const [products, setProducts] = useState([]);
   const [discount, setDiscount] = useState(false);
-
+  const path = "https://api.mercadolibre.com/sites/MLA/";
   useEffect(() => {
     const searchProducts = async (txtToSearchs) => {
       let resApi = await fetch(
-        `https://api.mercadolibre.com/sites/MLA/search?q=${txtToSearch}&limit=5`
+        `${path}search?q=${txtToSearch}&limit=4`
       );
       let products = await resApi.json();
       setProducts(products.results);
@@ -36,7 +36,7 @@ const Plp = () => {
       {products.map((product) => (
         <div className="container" key={product.id}>
           <div className="flex-grid-plp">
-            <div className="col-plp-bg">
+            <div className="col-plp-bg border-botton card-plp">
               <div className="col-plp wh-20">
                 <Link to={`/items/${product.id}`}>
                   <img className="plp-img plp-height" src={product.thumbnail} />
@@ -48,14 +48,14 @@ const Plp = () => {
                     {checkData(product.prices.prices)}
                   </Link>
                 </p>
-                <div className="container-card-plp">
+                <div className="container-card-plp height-80">
                   <div className="col-card-plp">
-                    <p className="p-txt-description-card-plp">
+                    <p className="p-txt-description-card-plp txt-20">
                       <Link to={`/items/${product.id}`}>{product.title}</Link>
                     </p>
                   </div>
                   <div className="col-card-plp">
-                    <p className="p-txt-card-plp center">
+                    <p className="p-txt-card-plp center txt-20">
                       <Link to={`/items/${product.id}`}>No sé que dice</Link>
                     </p>
                   </div>
