@@ -9,22 +9,38 @@ $wh-70: 70%;
 $wh-80: 80%;
 $wh-90: 90%;
 $wh-100: 100%;
-$bg-fondo: #eeeeee;
-$company-color: #fff159;
+$separated-1em: 1em;
+$color-silver: #eeeeee;
+$color-white: #fff;
+$color-yellow: #fff159;
+$color-blue: #3483fa;
+$color-black: #000000;
+$color-green: #00a650;
 $margin-0: 0;
+$margin-1-4em: 1.4em;
+$border-radius: 6px;
+$align-l: left;
+$align-r: right;
+$align-c: center;
+@font-face {
+  font-family: "MyWebFont";
+  src: url("../assets/fonts/proximanova-light.woff2") format("woff2"),
+    url("../assets/fonts/proximanova-light.woff2") format("woff");
+}
 
 body,
 html {
+  font-family: MyWebFont;
   font-size: 22px;
-  background-color: $bg-fondo;
+  background-color: $color-silver;
   margin: $margin-0;
 }
 
 header {
-  background-color: $company-color;
+  background-color: $color-yellow;
 }
 .card {
-  color: white;
+  color: $color-white;
   padding: 1rem;
 }
 
@@ -64,7 +80,6 @@ header {
 
 .container {
   max-width: 1200px;
-  //background-color: red;
   margin: 0 auto;
   display: flex;
   grid-gap: 1rem;
@@ -98,7 +113,7 @@ header {
 svg.sc-bcXHqe.eWFcRu.search-icon {
   margin: 0;
   padding: 10px;
-  background-color: #eeeeee;
+  background-color: $color-silver;
 }
 
 // delete backgorund on searching list
@@ -107,12 +122,12 @@ li > svg.sc-bcXHqe.eWFcRu.search-icon {
 }
 .hCpHso .selected,
 li > svg.sc-bcXHqe.eWFcRu.search-icon:hover {
-  background-color: #3483fa !important;
-  color: #fff;
+  background-color: $color-blue !important;
+  color: $color-white;
 }
 li .selected .eWFcRu,
 li:hover .eWFcRu {
-  fill: white !important;
+  fill: $color-white !important;
 }
 
 .clear-icon {
@@ -123,17 +138,18 @@ nav {
   display: block;
 }
 
+.amount,
 ol {
   display: block;
   list-style-type: decimal;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
+  margin-block-start: $separated-1em;
+  margin-block-end: $separated-1em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
-  padding-inline-start: 40px;
+  // padding-inline-start: 40px;
 }
 .andes-breadcrumb .andes-breadcrumb__link {
-  color: #3483fa;
+  color: $color-blue;
   cursor: pointer;
   text-decoration: none;
 }
@@ -152,5 +168,106 @@ ol {
   margin-left: auto;
   margin-right: auto;
   height: 395px;
-  border: 1px solid #000000;
+  border: 1px solid $color-black;
+}
+
+// .plp-height {
+//   width: 100%;
+//   height: 100%;
+// }
+
+// .plp-bg-white {
+//   background-color: $color-white;
+// }
+.border_bottom_silver {
+  border-bottom: 1px solid $color-silver;
+}
+
+.content-amount {
+  display: flex;
+}
+
+/*PLP*/
+
+.flex-grid-plp {
+  display: contents;
+}
+
+// .col-plp {
+//   padding: $separated-1em;
+// }
+
+.container-card-plp {
+  // display: flex;
+  // justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+}
+
+.col-card-plp {
+  width: 50%;
+}
+
+.width-10 {
+  width: 10%;
+}
+.width-90 {
+  width: 90%;
+}
+
+.pt-0 {
+  padding-top: 0px;
+}
+.mt-0 {
+  margin-top: 0px;
+}
+
+.card-plp-discount {
+  display: inline-flex;
+  height: 10px;
+  width: 10px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  background-color: $color-green;
+  margin: $margin-1-4em;
+}
+
+img.plp-height {
+  max-width: 180px;
+  max-height: 180px;
+}
+
+.bg-color-white {
+  background-color: $color-white;
+}
+
+.col-plp-bg {
+  display: flex;
+  background-color: $color-white;
+  width: 100%;
+  margin: 0 $separated-1em 0 $separated-1em;
+  padding: $separated-1em 0 $separated-1em 0;
+  border-bottom: 1px solid $color-silver;
+}
+
+.col-plp-bg:hover {
+  box-shadow: 0px 1px 10px 2px $color-silver inset;
+  -webkit-box-shadow: 0px 1px 10px 2px $color-silver inset;
+  -moz-box-shadow: 0px 1px 10px 2px $color-silver inset;
+}
+
+p a {
+  color: $color-black;
+  text-decoration: none;
+}
+
+.center {
+  text-align: $align-c;
+}
+
+.plp-img{
+ padding-left: $separated-1em; 
+ width: 80%;
+ height: 80%;
+ object-fit: contain;
 }
