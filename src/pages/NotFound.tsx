@@ -1,4 +1,3 @@
-import React from "react";
 import Error from "../components/Error";
 import img from "../assets/upss.svg";
 

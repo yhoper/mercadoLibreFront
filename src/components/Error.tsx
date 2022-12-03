@@ -1,8 +1,16 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Error = ({ img, title, action }) => {
+interface ErrorPros {
+  img:string,
+  title:string,
+  action?: Function,
+}
+
+const Error:FC<ErrorPros> = (props) => {
+
+  const { img, title, action } = props
+
   const history = useNavigate();
   const checkIfHasActionProp = () => !!action && action();
 
@@ -24,13 +32,5 @@ const Error = ({ img, title, action }) => {
     </main>
   );
 };
-
-Error.propTypes = {
-  img: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  action: PropTypes.func,
-};
-
-Error.defaultProps = { func: () => {} };
 
 export default Error;

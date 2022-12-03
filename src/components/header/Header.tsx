@@ -1,14 +1,16 @@
-import React from "react";
+import React, { FC } from "react";
 import { Logo } from "./Logo";
 import { SearchBox } from "./SearchBox";
-const Header = () => {
+
+const Header:FC = () => {
+
   return (
     <header>
-      <div className="container">
+      <div className="container" >
         <Logo />
         <SearchBox />
       </div>
     </header>
-  );
-};
-export default Header;
+  )
+}
+export default Header

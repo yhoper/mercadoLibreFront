@@ -1,30 +1,35 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation, useParams, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useLocation, Link } from "react-router-dom";
+import { searchProducts } from "../../api/mercadolibre";
+import { amountFormat } from "../../utils/functions"
+import { Item } from "../../interfaces/products"
+
 const Plp = () => {
+
   let location = useLocation();
   let txtUrl = location.search;
   let txtToSearch = txtUrl.split("?search=")[1].replace(/-/g, " ");
-  const [products, setProducts] = useState([]);
-  const [discount, setDiscount] = useState(false);
-  const path = "https://api.mercadolibre.com/sites/MLA/";
+  
+  const [products, setProducts] = useState<Item[]>();
+ 
   useEffect(() => {
-    const searchProducts = async (txtToSearchs) => {
-      let resApi = await fetch(
-        `${path}search?q=${txtToSearch}&limit=4`
-      );
-      let products = await resApi.json();
-      setProducts(products.results);
-    };
-    searchProducts(txtToSearch);
-  }, []);
+    if(txtToSearch) {
+      const data:Item[] = [];
+      searchProducts(txtToSearch).then((response:any) => {
+        response.map((res:any) => data.push(res.items[0]))
+        setProducts(data);
+      })
+    }
+  },[]);
 
-  const checkData = (data) => {
-    let amount = data[data.length - 1].amount;
-    let amountFormat = new Intl.NumberFormat("es-CL").format(amount);
+  const checkData = (data:number) => {
+    let amount = data;
+    let price = amountFormat(amount)
+
     return (
       <span className="content-amount">
-        <span className="amount">$ {amountFormat}</span>
-        {data[data.length - 1].regular_amount != null && (
+        <span className="amount">${price}</span>
+        {data != null && (
           <span className="card-plp-discount"> </span>
         )}
       </span>
@@ -33,19 +38,19 @@ const Plp = () => {
 
   return (
     <main>
-      {products.map((product) => (
+      { products?.map((product:Item) => (
         <div className="container" key={product.id}>
           <div className="flex-grid-plp">
             <div className="col-plp-bg border-botton card-plp">
               <div className="col-plp wh-20">
                 <Link to={`/items/${product.id}`}>
-                  <img className="plp-img plp-height" src={product.thumbnail} />
+                  <img className="plp-img plp-height" src={product.picture} alt={product.title} />
                 </Link>
               </div>
               <div className="col-plp wh-80">
                 <p className="pt-0, mt-0 mount">
                   <Link to={`/items/${product.id}`}>
-                    {checkData(product.prices.prices)}
+                    {checkData(product.price.amount)}
                   </Link>
                 </p>
                 <div className="container-card-plp height-80">

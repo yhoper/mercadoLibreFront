@@ -44,7 +44,9 @@ header {
   color: $color-white;
   padding: 1rem;
 }
-
+h1{
+  font-size: 1.5rem;
+}
 .wh-10 {
   width: $wh-10;
 }
@@ -229,6 +231,10 @@ nav {
 }
 .pd-l-r-1rem {
   padding: 0px $separated-1em !important;
+}
+.container-img-pdp{
+  display:flex;
+  justify-content: center;
 }
 
 .card-plp-discount {
