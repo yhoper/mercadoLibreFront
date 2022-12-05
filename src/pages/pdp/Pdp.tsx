@@ -1,32 +1,36 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProductDetails, searchProductDescription } from "../../api/mercadolibre";
-import { ProductDescriptionProps } from "../../interfaces/productDescription"
-import { ProductDetails } from "../../interfaces/productDetails"
-import { amountFormat} from "../../utils/functions"
+import {
+  getProductDetails,
+  searchProductDescription,
+} from "../../api/mercadolibre";
+import Breadcrumb from "../../components/breadcrumb/Breadcrumb";
+import { ProductDescriptionProps } from "../../interfaces/productDescription";
+import { ProductDetails } from "../../interfaces/productDetails";
+import { amountFormat } from "../../utils/functions";
 
 const Pdp = () => {
-  
   let { id } = useParams();
- 
+
   const [item, setItem] = useState<ProductDetails>();
-  const [itemDescription, setItemDescription] = useState('');
+  const [itemDescription, setItemDescription] = useState("");
 
   useEffect(() => {
-    if(id) {
-      getProductDetails(id).then((response:ProductDetails) => {   
+    if (id) {
+      getProductDetails(id).then((response: ProductDetails) => {
         setItem(response);
-      })
-  
-      searchProductDescription(id).then((response:ProductDescriptionProps) => {
-        const value =response.plain_text.replace("\n", " ");
+      });
+
+      searchProductDescription(id).then((response: ProductDescriptionProps) => {
+        const value = response.plain_text.replace("\n", " ");
         setItemDescription(value);
-      })
+      });
     }
   }, [id]);
-  
+
   return (
     <main>
+      <Breadcrumb />
       <div className="container">
         <div className="flex-grid-plp">
           <div className="col-plp-bg">
@@ -35,7 +39,10 @@ const Pdp = () => {
             </div>
             <div className="col-plp wh-30 pd-l-r-1rem">
               <h1 className="h1 t-0, mt-0 mount">{item?.item?.title}</h1>
-              <p className="pt-0, mt-0 mount"> ${ item?.item?.price && amountFormat(item?.item?.price.amount)}</p>
+              <p className="pt-0, mt-0 mount">
+                {" "}
+                ${item?.item?.price && amountFormat(item?.item?.price.amount)}
+              </p>
               <button className="btn-buy">Comprar ahora</button>
             </div>
           </div>

@@ -1,50 +1,56 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { searchProducts } from "../../api/mercadolibre";
-import { amountFormat } from "../../utils/functions"
-import { Item } from "../../interfaces/products"
+import { amountFormat } from "../../utils/functions";
+import { Item } from "../../interfaces/products";
+import useBreadcrumbs from "use-react-router-breadcrumbs";
+import Breadcrumb from "../../components/breadcrumb/Breadcrumb";
 
 const Plp = () => {
-
+  const breadcrumbs = useBreadcrumbs();
   let location = useLocation();
   let txtUrl = location.search;
   let txtToSearch = txtUrl.split("?search=")[1].replace(/-/g, " ");
-  
-  const [products, setProducts] = useState<Item[]>();
- 
-  useEffect(() => {
-    if(txtToSearch) {
-      const data:Item[] = [];
-      searchProducts(txtToSearch).then((response:any) => {
-        response.map((res:any) => data.push(res.items[0]))
-        setProducts(data);
-      })
-    }
-  },[]);
 
-  const checkData = (data:number) => {
+  const [products, setProducts] = useState<Item[]>();
+
+  useEffect(() => {
+    if (txtToSearch) {
+      const data: Item[] = [];
+      searchProducts(txtToSearch).then((response: any) => {
+        response.map((res: any) => data.push(res.items[0]));
+        setProducts(data);
+      });
+    }
+  }, []);
+
+  const checkData = (data: number) => {
     let amount = data;
-    let price = amountFormat(amount)
+    let price = amountFormat(amount);
 
     return (
       <span className="content-amount">
         <span className="amount">${price}</span>
-        {data != null && (
-          <span className="card-plp-discount"> </span>
-        )}
+        {data != null && <span className="card-plp-discount"> </span>}
       </span>
     );
   };
 
   return (
     <main>
-      { products?.map((product:Item) => (
+      <Breadcrumb />
+
+      {products?.map((product: Item) => (
         <div className="container" key={product.id}>
           <div className="flex-grid-plp">
             <div className="col-plp-bg border-botton card-plp">
               <div className="col-plp wh-20">
                 <Link to={`/items/${product.id}`}>
-                  <img className="plp-img plp-height" src={product.picture} alt={product.title} />
+                  <img
+                    className="plp-img plp-height"
+                    src={product.picture}
+                    alt={product.title}
+                  />
                 </Link>
               </div>
               <div className="col-plp wh-80">
