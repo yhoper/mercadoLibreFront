@@ -1,6 +1,6 @@
 import { useState, useEffect, Fragment } from "react";
 import { useLocation, Link } from "react-router-dom";
-import { searchProducts } from "../../api/mercadolibre";
+import { searchListProducts } from "../../api/mercadolibre";
 import { amountFormat } from "../../utils/functions";
 import { Item } from "../../interfaces/products";
 import useBreadcrumbs from "use-react-router-breadcrumbs";
@@ -17,7 +17,7 @@ const Plp = () => {
   useEffect(() => {
     if (txtToSearch) {
       const data: Item[] = [];
-      searchProducts(txtToSearch).then((response: any) => {
+      searchListProducts(txtToSearch).then((response: any) => {
         response.map((res: any) => data.push(res.items[0]));
         setProducts(data);
       });

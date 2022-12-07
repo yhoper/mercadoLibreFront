@@ -21,8 +21,18 @@ export const searchProductDescription = async (id:string) => {
     }
 };
 
-export const searchProducts = async (txtToSearchs:string) => {
+export const searchBoxProducts = async (txtToSearchs:string) => {
     const url = `${BASE}/${txtToSearchs}`
+    try {
+        const response = await axios(`${url}`);
+        return response.data
+    } catch(error) {
+        console.log(error)
+    }
+};
+
+export const searchListProducts = async (txtToSearchs:string) => {
+    const url = `${BASE}/list/${txtToSearchs}`
     try {
         const response = await axios(`${url}`);
         return response.data

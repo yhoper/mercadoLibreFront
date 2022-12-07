@@ -1,6 +1,6 @@
 import { useState, FC } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import { searchProducts } from "../../api/mercadolibre";
+import { searchBoxProducts } from "../../api/mercadolibre";
 import { Item } from "../../interfaces/products"
 
 export const SearchBox:FC = () => {
@@ -15,7 +15,7 @@ export const SearchBox:FC = () => {
 
   const handleOnSearch = async(keyword:string) => {
     const data:Item[] = [];
-    await searchProducts(keyword).then((response:any) => {
+    await searchBoxProducts(keyword).then((response:any) => {
       response.map((res:any) => data.push(res.items[0]))
       setItems(data);
     })
