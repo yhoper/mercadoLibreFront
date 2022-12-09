@@ -16,7 +16,7 @@ export const SearchBox:FC = () => {
   const handleOnSearch = async(keyword:string) => {
     const data:Item[] = [];
     await searchBoxProducts(keyword).then((response:any) => {
-      response.map((res:any) => data.push(res.items[0]))
+      response.map((res:any) => data.push(res))
       setItems(data);
     })
   };

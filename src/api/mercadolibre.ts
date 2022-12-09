@@ -25,7 +25,7 @@ export const searchBoxProducts = async (txtToSearchs:string) => {
     const url = `${BASE}/${txtToSearchs}`
     try {
         const response = await axios(`${url}`);
-        return response.data
+        return response?.data?.items
     } catch(error) {
         console.log(error)
     }

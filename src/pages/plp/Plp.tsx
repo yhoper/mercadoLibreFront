@@ -3,23 +3,29 @@ import { useLocation, Link } from "react-router-dom";
 import { searchListProducts } from "../../api/mercadolibre";
 import { amountFormat } from "../../utils/functions";
 import { Item } from "../../interfaces/products";
-import useBreadcrumbs from "use-react-router-breadcrumbs";
 import Breadcrumb from "../../components/breadcrumb/Breadcrumb";
 
 const Plp = () => {
-  const breadcrumbs = useBreadcrumbs();
   let location = useLocation();
-  let txtUrl = location.search;
-  let txtToSearch = txtUrl.split("?search=")[1].replace(/-/g, " ");
+  let txtUrl = location?.search;
+  let currentLink = txtUrl?.split("?search=")[1];
+  let txtToSearch = txtUrl?.split("?search=")[1].replace(/-/g, " ");
+
+  
+  
 
   const [products, setProducts] = useState<Item[]>();
+  const [categories, setCategories] = useState<[]>();
 
   useEffect(() => {
     if (txtToSearch) {
       const data: Item[] = [];
       searchListProducts(txtToSearch).then((response: any) => {
-        response.map((res: any) => data.push(res.items[0]));
+        response.items.map((res: any) => {
+          data.push(res);
+        });
         setProducts(data);
+        setCategories(response.categories);
       });
     }
   }, []);
@@ -38,7 +44,7 @@ const Plp = () => {
 
   return (
     <main>
-      <Breadcrumb />
+      <Breadcrumb categories={categories} currentLink={currentLink}/>
 
       {products?.map((product: Item) => (
         <div className="container" key={product.id}>
