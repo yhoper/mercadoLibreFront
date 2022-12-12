@@ -30,7 +30,7 @@ const Pdp = () => {
 
   return (
     <main>
-      <Breadcrumb />
+      {/* <Breadcrumb categories={[]} currentLink={''}/> */}
       <div className="container">
         <div className="flex-grid-plp">
           <div className="col-plp-bg">

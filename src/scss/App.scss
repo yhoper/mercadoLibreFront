@@ -44,7 +44,7 @@ header {
   color: $color-white;
   padding: 1rem;
 }
-h1{
+h1 {
   font-size: 1.5rem;
 }
 .wh-10 {
@@ -232,8 +232,8 @@ nav {
 .pd-l-r-1rem {
   padding: 0px $separated-1em !important;
 }
-.container-img-pdp{
-  display:flex;
+.container-img-pdp {
+  display: flex;
   justify-content: center;
 }
 
@@ -262,10 +262,9 @@ img.plp-height {
   width: 100%;
   margin: 0 $separated-1em 0 $separated-1em;
   padding: $separated-1em 0 $separated-1em 0;
-  
 }
 
-.border-botton{
+.border-botton {
   border-bottom: 1px solid $color-silver;
 }
 
@@ -305,3 +304,56 @@ p a {
   background-color: $color-blue;
 }
 
+.breadcrumb {
+  padding: 0.1em;
+  
+}
+
+.breadcrumb li {
+  padding: 0.05em 0.25em;
+  float: left;
+  color: #444;
+  list-style-type: none;
+}
+
+.breadcrumb li:after {
+  content: "›";
+  display: inline;
+  font-size: 1.2em;
+  color: #aaa;
+
+  padding: 0 0.0725em 0 0.15em;
+}
+
+.breadcrumb li:last-child:after {
+  content: "";
+}
+
+.breadcrumb ul /* use as midair border */ {
+  padding: 0;
+  margin: 0.25em 1rem;
+}
+
+.clear:after,
+.clear:before {
+  content: "";
+  display: table;
+}
+
+.clear:after {
+  clear: both;
+}
+
+.clear {
+  display: inline-block;
+  display: block;
+}
+
+.breadcrumb ul li a{
+  text-decoration: none;
+  color: $color-black;
+}
+
+.breadcrumb ul li a:hover{ 
+  color: $color-blue;
+}
