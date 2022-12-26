@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { errorBoundary } from "./helpers/errorBoundary";
 import "./scss/App.scss";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const Header = lazy(() => import("./components/header/Header"));
 const Home = lazy(() => import("./pages/home/Home"));
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
+        <ReactQueryDevtools />
       </QueryClientProvider>
     </>
   );
