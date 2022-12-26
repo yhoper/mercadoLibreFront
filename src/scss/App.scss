@@ -17,6 +17,7 @@ $color-blue: #3483fa;
 $color-blue-dark: #2077fa;
 $color-black: #000000;
 $color-green: #00a650;
+$color-silver: rgba(0, 0, 0, 0.04);
 $margin-0: 0;
 $margin-1-4em: 1.4em;
 $border-radius: 6px;
@@ -291,7 +292,7 @@ p a {
 }
 
 .btn-buy {
-  background-color: #3483fa;
+  background-color: $color-blue;
   border: 0;
   padding: 14px;
   border-radius: 6px;
@@ -306,7 +307,6 @@ p a {
 
 .breadcrumb {
   padding: 0.1em;
-  
 }
 
 .breadcrumb li {
@@ -349,11 +349,67 @@ p a {
   display: block;
 }
 
-.breadcrumb ul li a{
+.breadcrumb ul li a {
   text-decoration: none;
   color: $color-black;
 }
 
-.breadcrumb ul li a:hover{ 
+.breadcrumb ul li a:hover {
   color: $color-blue;
+}
+
+.containerPagination {
+  display: flex;
+  justify-content: center;
+}
+
+.containerPagination button {
+  border: none;
+  color: #2077fa;
+  font-size: large;
+  padding: 0.4rem;
+  background: none;
+}
+
+.containerPagination button {
+  text-decoration: none;
+  color: $color-blue;
+}
+
+.containerPagination button:hover {
+  text-decoration: none;
+  background-color: $color-silver;
+  border: 10px !important;
+}
+
+.loader {
+  border: 16px solid rgb(200, 200, 200);
+  border-radius: 50%;
+  border-top: 16px solid $color-yellow;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

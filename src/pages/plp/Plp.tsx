@@ -33,7 +33,6 @@ const Plp = () => {
           items.push(res);
         });
         setCategories(response.categories);
-        //setProducts(items);
         return items;
       }
     );
@@ -58,48 +57,56 @@ const Plp = () => {
   return (
     <main>
       <Breadcrumb categories={categories} currentLink={currentLink} />
-
-      <div className="container">
-        <button onClick={() => changePage("back")}>Anterior {page}</button>
-        <button onClick={() => changePage("next")}>Siguiente {page}</button>
-      </div>
-
-      {data?.map((product: Item) => (
-        <div className="container" key={product.id}>
-          <div className="flex-grid-plp">
-            <div className="col-plp-bg border-botton card-plp">
-              <div className="col-plp wh-20">
-                <Link to={`/items/${product.id}`}>
-                  <img
-                    className="plp-img plp-height"
-                    src={product.picture}
-                    alt={product.title}
-                  />
-                </Link>
-              </div>
-              <div className="col-plp wh-80">
-                <p className="pt-0, mt-0 mount">
+      {isLoading === true ? (
+        <>
+          <div className="loader"></div>
+          <div className="containerPagination">
+            <div className="loading">Espere, Cargando más productos...</div>
+          </div>
+        </>
+      ) : (
+        data?.map((product: Item) => (
+          <div className="container" key={product.id}>
+            <div className="flex-grid-plp">
+              <div className="col-plp-bg border-botton card-plp">
+                <div className="col-plp wh-20">
                   <Link to={`/items/${product.id}`}>
-                    {checkData(product.price.amount)}
+                    <img
+                      className="plp-img plp-height"
+                      src={product.picture}
+                      alt={product.title}
+                    />
                   </Link>
-                </p>
-                <div className="container-card-plp height-80">
-                  <div className="col-card-plp">
-                    <p className="p-txt-description-card-plp txt-20">
-                      <Link to={`/items/${product.id}`}>{product.title}</Link>
-                    </p>
-                  </div>
-                  <div className="col-card-plp">
-                    <p className="p-txt-card-plp center txt-20">
-                      <Link to={`/items/${product.id}`}>No sé que dice</Link>
-                    </p>
+                </div>
+                <div className="col-plp wh-80">
+                  <p className="pt-0, mt-0 mount">
+                    <Link to={`/items/${product.id}`}>
+                      {checkData(product.price.amount)}
+                    </Link>
+                  </p>
+                  <div className="container-card-plp height-80">
+                    <div className="col-card-plp">
+                      <p className="p-txt-description-card-plp txt-20">
+                        <Link to={`/items/${product.id}`}>{product.title}</Link>
+                      </p>
+                    </div>
+                    <div className="col-card-plp">
+                      <p className="p-txt-card-plp center txt-20">
+                        <Link to={`/items/${product.id}`}>No sé que dice</Link>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      )}
+
+      <div className="containerPagination">
+        <button onClick={() => changePage("back")}>{`< Anterior`} </button>
+        <button onClick={() => changePage("next")}>{`Siguiente >`} </button>
+      </div>
     </main>
   );
 };
