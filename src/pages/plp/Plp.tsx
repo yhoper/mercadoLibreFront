@@ -1,9 +1,10 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { searchListProducts } from "../../api/mercadolibre";
 import { amountFormat } from "../../utils/functions";
 import { Item } from "../../interfaces/products";
 import Breadcrumb from "../../components/breadcrumb/Breadcrumb";
+import { useQuery } from "react-query";
 
 const Plp = () => {
   let location = useLocation();
@@ -11,24 +12,33 @@ const Plp = () => {
   let currentLink = txtUrl?.split("?search=")[1];
   let txtToSearch = txtUrl?.split("?search=")[1].replace(/-/g, " ");
 
-  
-  
-
-  const [products, setProducts] = useState<Item[]>();
   const [categories, setCategories] = useState<[]>();
-
-  useEffect(() => {
-    if (txtToSearch) {
-      const data: Item[] = [];
-      searchListProducts(txtToSearch).then((response: any) => {
-        response.items.map((res: any) => {
-          data.push(res);
-        });
-        setProducts(data);
-        setCategories(response.categories);
-      });
+  const [page, setPage] = useState(0);
+  const changePage = (changed: string) => {
+    if (changed === "next") {
+      let newPage = page + 1;
+      setPage(newPage);
+    } else if (changed === "back") {
+      let newPage = page - 1;
+      setPage(newPage);
     }
-  }, []);
+    return;
+  };
+
+  const getProductList = async ({ queryKey }: any) => {
+    const items: Item[] = [];
+    const res = await searchListProducts(txtToSearch, queryKey[1]).then(
+      (response: any) => {
+        response.items.map((res: any) => {
+          items.push(res);
+        });
+        setCategories(response.categories);
+        //setProducts(items);
+        return items;
+      }
+    );
+    return res;
+  };
 
   const checkData = (data: number) => {
     let amount = data;
@@ -41,12 +51,20 @@ const Plp = () => {
       </span>
     );
   };
-
+  const { isLoading, error, data } = useQuery(
+    ["products", page],
+    getProductList
+  );
   return (
     <main>
-      <Breadcrumb categories={categories} currentLink={currentLink}/>
+      <Breadcrumb categories={categories} currentLink={currentLink} />
 
-      {products?.map((product: Item) => (
+      <div className="container">
+        <button onClick={() => changePage("back")}>Anterior {page}</button>
+        <button onClick={() => changePage("next")}>Siguiente {page}</button>
+      </div>
+
+      {data?.map((product: Item) => (
         <div className="container" key={product.id}>
           <div className="flex-grid-plp">
             <div className="col-plp-bg border-botton card-plp">
